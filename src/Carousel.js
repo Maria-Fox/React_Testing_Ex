@@ -6,7 +6,7 @@ import image3 from "./image3.jpg";
 import Card from "./Card";
 
 function Carousel(props) {
-  console.log("Carousel props:", props);
+  // console.log("Carousel props:", props);
 
   const [cardIdx, setCardIdx] = useState(0);
   const card = props.cardData[cardIdx];
@@ -15,7 +15,7 @@ function Carousel(props) {
   const goForward = () => setCardIdx(cardIdx + 1);
   const goBackward = () => setCardIdx(cardIdx -1);  
 
-  // returns an instance of Card component.
+  // returns an instance of Card component. 
 
   return (
     <div className="Carousel">

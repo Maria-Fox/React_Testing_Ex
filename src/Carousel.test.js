@@ -11,8 +11,8 @@ it("Should render a Carousel upon page load", function () {
 })
 
 it("Matches snapshot upon inital load", function () {
-  let { asFragemnt } = render(<Carousel />);
-  expect(asFragemnt()).toMatchSnapshot();
+  let { asFragment } = render(<Carousel />);
+  expect(asFragment()).toMatchSnapshot();
 })
 
 it("works when you click on the RIGHT arrow", function() {
@@ -69,6 +69,8 @@ it("Should remove the LEFT arrow on 1st carousel img.", function(){
 
   let firstImg = queryByAltText("Photo by Richard Pasquarella on Unsplash");
   expect(firstImg).toBeInTheDocument();
+  let secondImg = queryByAltText("Photo by Pratik Patel on Unsplash");
+  expect(secondImg).not.toBeInTheDocument();
 });
 
 it("Should remove RIGHT arrow on last carousel img.", function(){
@@ -80,18 +82,25 @@ it("Should remove RIGHT arrow on last carousel img.", function(){
   expect(rightArrow).toBeInTheDocument();
 
   fireEvent.click(rightArrow);
-  expect(leftArrow).toBeInTheDocument();
+  let secondImg = queryByAltText("Photo by Pratik Patel on Unsplash");
+  expect(secondImg).toBeInTheDocument();
+  fireEvent.click(rightArrow);
+
   expect(rightArrow).not.toBeInTheDocument();
+  // expect(leftArrow).toBeInTheDocument();
 });
 
 it("should render both arrows on middle img", function() {
-  let {queryByTestId} = render(<Carousel />);
+  let {queryByTestId, queryByAltText} = render(<Carousel />);
   let leftArrow = queryByTestId("left-arrow");
   let rightArrow = queryByTestId("right-arrow");
   expect(leftArrow).not.toBeInTheDocument();
   expect(rightArrow).toBeInTheDocument();
   
   fireEvent.click(rightArrow);
-  expect(leftArrow).toBeInTheDocument();
+  let secondImg = queryByAltText("Photo by Pratik Patel on Unsplash")
+  expect(secondImg).toBeInTheDocument();
+
+  // expect(leftArrow).toBeInTheDocument();
   expect(rightArrow).toBeInTheDocument();
 });
